@@ -1,6 +1,21 @@
 from django.db import models
 
 # Create your models here.
+class DrinksCategory(models.Model):
+    category_name = models.CharField(max_length=200)
+
 class Drinks(models.Model):
-    drink_name = models.CharField(max_length=200)
+    drink = models.CharField(max_length=200)
     price = models.IntegerField()
+    category_id = models.ForeignKey(DrinksCategory, on_delete=models.PROTECT, default=None)
+
+
+
+#Agregar entradas a las tablas
+#>>> from myapp.models import DrinksCategory
+#>>> cat = DrinksCategory(category_name='coffee')
+#>>> cat.save()
+#>>> from myapp.models import DrinksCategory, Drinks
+#>>> fk = DrinksCategory.objects.get(pk=1)
+#>>> drink = Drinks(drink='mocha', price=7, category_id=fk)
+#>>> drink.save()
